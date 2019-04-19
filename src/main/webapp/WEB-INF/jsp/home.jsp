@@ -57,6 +57,7 @@
                 </li>
             </ul>
             <div class="col-2"></div>
+        </div>
     </nav>
 </div>
 <!-- end of navbar -->

@@ -16,7 +16,7 @@ public class Job {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private Account company;
+    private Company company;
 
     @Column(name = "published_at")
     private LocalDateTime publishedAt;

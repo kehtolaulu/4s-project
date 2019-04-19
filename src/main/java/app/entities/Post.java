@@ -36,4 +36,6 @@ public class Post {
             inverseJoinColumns = {@JoinColumn(name = "account_id")})
     List<Account> likedBy = new LinkedList<>();
 
+    @OneToMany
+    List<Comment> comments = new LinkedList<>();
 }
