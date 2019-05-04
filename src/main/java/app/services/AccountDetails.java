@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class AccountDetails implements UserDetails {
     private Account user;
@@ -15,7 +16,15 @@ public class AccountDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        final LinkedList<GrantedAuthority> grantedAuthorities = new LinkedList<>();
+        final GrantedAuthority grantedAuthority = new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                return "ROLE_" + user.getType();
+            }
+        };
+        grantedAuthorities.add(grantedAuthority);
+        return grantedAuthorities;
     }
 
     @Override

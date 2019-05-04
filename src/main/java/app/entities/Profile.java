@@ -1,6 +1,7 @@
 package app.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Data
+@ToString(exclude = {"skills", "interests", "savedJobs", "applications", "workExperiences", "educations"})
 @Entity
 @Table(name = "profile")
 public class Profile extends Account {
@@ -25,13 +27,17 @@ public class Profile extends Account {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "profile_skills",
-            joinColumns = {@JoinColumn(name = "profile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
-    )
-    List<Skill> skills = new LinkedList<>();
+    @OneToMany
+    @JoinColumn(name = "profile_id")
+    List<ProfileSkill> skills = new LinkedList<>();
+
+    @OneToMany
+    @JoinColumn(name = "profile_id")
+    List<Education> educations = new LinkedList<>();
+
+    @OneToMany
+    @JoinColumn(name = "profile_id")
+    List<WorkExperience> workExperiences = new LinkedList<>();
 
     @ManyToMany
     @JoinTable(
@@ -59,5 +65,10 @@ public class Profile extends Account {
     @Override
     public String getName() {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public String getType() {
+        return "HUMAN";
     }
 }

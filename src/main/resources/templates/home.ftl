@@ -13,7 +13,7 @@
             <#list posts as p>
                 <div class="card text-center">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="#" class="card-link">${p.headline}</a></h5>
+                        <h5 class="card-title"><a href="/posts/${p.id}" class="card-link">${p.headline}</a></h5>
                         <p class="card-text">Author: ${p.author.name}</p>
                     </div>
                     <div class="card-footer text-muted">

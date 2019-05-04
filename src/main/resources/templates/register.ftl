@@ -1,5 +1,6 @@
 <#include "_html.ftl">
 
+<#macro navbar></#macro>
 
 <#macro body>
 <div class="row">
@@ -99,7 +100,7 @@
                         <div class="form-row">
                             <div class="col-1"></div>
                             <div class="form-group col-5">
-                                <input name='companyName' type="text" class="form-control" id="companyName"
+                                <input name='name' type="text" class="form-control" id="companyName"
                                        placeholder="Company name" required>
                             </div>
                             <div class="form-group col-5">
@@ -111,11 +112,11 @@
                         <div class="form-row">
                             <div class="col-1"></div>
                             <div class="form-group col-5">
-                                <input name='companyEmail' type="email" class="form-control" id="companyEmail" placeholder="Email"
+                                <input name='email' type="email" class="form-control" id="companyEmail" placeholder="Email"
                                        required>
                             </div>
                             <div class="form-group col-5">
-                                <input name='companyNumber' type="text" class="form-control" id="companyNumber"
+                                <input name='phoneNumber' type="text" class="form-control" id="companyNumber"
                                        placeholder="Phone number" required>
                             </div>
                             <div class="col-1"></div>

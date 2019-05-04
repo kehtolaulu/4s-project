@@ -1,4 +1,4 @@
-package app.controllers;
+package app.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -43,8 +43,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=wrong_password")
                 .and()
                 .logout()
+                .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login")
-                .permitAll();
+                .permitAll()
+                .and()
+                .rememberMe()
+                .key("uniqueAndSecret")
+                .userDetailsService(userDetailsService);
     }
 
     @Bean

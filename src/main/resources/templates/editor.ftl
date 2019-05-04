@@ -18,9 +18,7 @@
         </div>
 </#macro>
 
-
 <#macro body>
-
 <form id="article" method="post" action="/editor">
     <div class="form-group row">
         <div class="col-1"></div>

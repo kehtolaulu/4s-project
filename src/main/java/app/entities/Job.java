@@ -36,4 +36,5 @@ public class Job {
 
     @Column(name = "job_functions")
     private String jobFunctions;
+
 }

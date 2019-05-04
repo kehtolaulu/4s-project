@@ -1,6 +1,7 @@
 package app.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Data
+@ToString(exclude = {"author", "comments"})
 @Entity
 @Table(name = "post")
 public class Post {
@@ -30,12 +32,6 @@ public class Post {
     @Column(name = "headline")
     private String headline;
 
-    @ManyToMany
-    @JoinTable(name = "like_to_post",
-            joinColumns = {@JoinColumn(name = "post_id")},
-            inverseJoinColumns = {@JoinColumn(name = "account_id")})
-    List<Account> likedBy = new LinkedList<>();
-
     @OneToMany
-    List<Comment> comments = new LinkedList<>();
+    private List<Comment> comments = new LinkedList<>();
 }

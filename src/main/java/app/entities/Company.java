@@ -1,6 +1,7 @@
 package app.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -19,4 +20,8 @@ public class Company extends Account {
     @Column(name = "description")
     private String description;
 
+    @Override
+    public String getType() {
+        return "COMPANY";
+    }
 }

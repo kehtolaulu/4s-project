@@ -1,11 +1,13 @@
 package app.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
+@ToString(exclude = {"post", "author"})
 @Entity
 @Table(name = "comment")
 public class Comment {
@@ -18,16 +20,12 @@ public class Comment {
     private Post post;
 
     @ManyToOne
-    @JoinColumn(name = "parent_comment_id")
-    private Comment parentComment;
-
-    @ManyToOne
     @JoinColumn(name = "author_id")
     private Account author;
 
     @Column(name = "content")
     private String content;
 
-    @Column(name = "datetime")
-    private LocalDateTime datetime;
+    @Column(name = "published_at")
+    private LocalDateTime publishedAt;
 }

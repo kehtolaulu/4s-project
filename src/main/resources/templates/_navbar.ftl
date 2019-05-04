@@ -14,11 +14,13 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
             <ul class="nav nav-fill nav-pills">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">Home</a>
+                    <a href="/home" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">My network</a>
-                </li>
+                <@security.authorize access="hasRole('ROLE_HUMAN')">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">My network</a>
+                    </li>
+                </@security.authorize>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Jobs</a>
                 </li>
@@ -26,6 +28,7 @@
                     <a href="#" class="nav-link">Messaging</a>
                 </li>
             </ul>
+
 
             <ul class="nav nav-pills justify-content-end">
                 <li class="nav-item dropdown">

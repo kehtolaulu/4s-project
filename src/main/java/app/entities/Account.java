@@ -26,4 +26,5 @@ public abstract class Account {
     protected String phoneNumber;
 
     abstract public String getName();
+    abstract public String getType();
 }
