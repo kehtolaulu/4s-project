@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping(path = "/register")
 public class RegisterController {
+    private final RegistrationService registrationService;
+
     @Autowired
-    private RegistrationService registrationService;
+    public RegisterController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
+    }
 
     @GetMapping
     public String getRegisterPage() {

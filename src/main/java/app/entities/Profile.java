@@ -27,6 +27,9 @@ public class Profile extends Account {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
+    @Column(name = "status")
+    private String status;
+
     @OneToMany
     @JoinColumn(name = "profile_id")
     List<ProfileSkill> skills = new LinkedList<>();

@@ -37,7 +37,7 @@
                         Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">View profile</a>
+                        <a class="dropdown-item" href="/profile">View profile</a>
                         <a class="dropdown-item" href="/logout">Log out</a>
                     </div>
                 </li>

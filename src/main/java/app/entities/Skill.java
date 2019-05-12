@@ -13,6 +13,6 @@ public class Skill {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "firstName")
+    @Column(name = "name")
     private String name;
 }

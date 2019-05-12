@@ -2,7 +2,7 @@ package app.controllers;
 
 import app.entities.Comment;
 import app.entities.Post;
-import app.repositories.PostsRepository;
+import app.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,16 +16,16 @@ import java.util.Optional;
 @Controller
 @RequestMapping(path = "/posts")
 public class PostsController {
-    private final PostsRepository postsRepository;
+    private final PostService postService;
 
     @Autowired
-    public PostsController(PostsRepository postsRepository) {
-        this.postsRepository = postsRepository;
+    public PostsController(PostService postService) {
+        this.postService = postService;
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public String getPostPage(@PathVariable Long id, ModelMap modelMap) {
-        final Optional<Post> post = postsRepository.findById(id);
+        final Optional<Post> post = postService.findPost(id);
         modelMap.put("post", post.get());
         final List<Comment> comments = post.get().getComments();
         modelMap.put("comments", comments);

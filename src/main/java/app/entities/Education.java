@@ -3,7 +3,6 @@ package app.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @Entity
@@ -28,9 +27,9 @@ public class Education {
     private String field;
 
     @Column(name = "started_at")
-    private LocalDate startedAt;
+    private Integer startedAt;
 
     @Column(name = "finished_at")
-    private LocalDate finishedAt;
+    private Integer finishedAt;
 
 }

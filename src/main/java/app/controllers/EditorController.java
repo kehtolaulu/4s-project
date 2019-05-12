@@ -1,28 +1,23 @@
 package app.controllers;
 
-import app.entities.Account;
 import app.entities.Post;
-import app.repositories.PostsRepository;
 import app.services.AccountDetails;
+import app.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping(path = "/editor")
 public class EditorController {
-
-    private final PostsRepository postsRepository;
+    private final PostService postService;
 
     @Autowired
-    public EditorController(PostsRepository postsRepository) {
-        this.postsRepository = postsRepository;
+    public EditorController(PostService postService) {
+        this.postService = postService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -32,9 +27,7 @@ public class EditorController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String addPost(Post post, @AuthenticationPrincipal AccountDetails account) {
-        post.setAuthor(account.getUser());
-        post.setPublishedAt(LocalDateTime.now());
-        postsRepository.save(post);
+        postService.create(post, account.getUser());
         return "redirect:/home";
     }
 }

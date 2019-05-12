@@ -1,7 +1,7 @@
 package app.controllers;
 
 import app.entities.Post;
-import app.repositories.PostsRepository;
+import app.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,16 +13,16 @@ import java.util.List;
 @Controller
 @RequestMapping(path = "/home")
 public class HomeController {
-    private final PostsRepository postsRepository;
+    private final PostService postService;
 
     @Autowired
-    public HomeController(PostsRepository postsRepository) {
-        this.postsRepository = postsRepository;
+    public HomeController(PostService postService) {
+        this.postService = postService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public String getHomePage(ModelMap modelMap) {
-        final List<Post> posts = postsRepository.findAll();
+        final List<Post> posts = postService.all();
         modelMap.put("posts", posts);
         return "home";
     }

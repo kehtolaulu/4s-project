@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "profile_skills")
 public class ProfileSkill {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -30,4 +30,8 @@ public class ProfileSkill {
             inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     private List<Profile> likedBy = new LinkedList<>();
+
+    public String getName() {
+        return skill.getName();
+    }
 }
