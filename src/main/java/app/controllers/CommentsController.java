@@ -2,7 +2,7 @@ package app.controllers;
 
 import app.entities.Comment;
 import app.services.AccountDetails;
-import app.services.PostNotFoundException;
+import app.exceptions.PostNotFoundException;
 import app.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -35,7 +35,7 @@ public class CommentsController {
             put("id", comment.getId());
             put("content", comment.getContent());
             put("publishedAt", comment.getPublishedAt());
-            put("author", new TreeMap() {{
+            put("author", new TreeMap<String, String>() {{
                 put("name", comment.getAuthor().getName());
             }});
         }};
