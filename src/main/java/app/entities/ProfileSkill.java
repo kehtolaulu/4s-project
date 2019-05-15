@@ -31,6 +31,13 @@ public class ProfileSkill {
     )
     private List<Profile> likedBy = new LinkedList<>();
 
+    public ProfileSkill() {}
+
+    public ProfileSkill(Profile profile, Skill skill) {
+        this.profile = profile;
+        this.skill = skill;
+    }
+
     public String getName() {
         return skill.getName();
     }
