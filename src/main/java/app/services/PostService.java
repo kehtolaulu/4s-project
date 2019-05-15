@@ -3,6 +3,7 @@ package app.services;
 import app.entities.Account;
 import app.entities.Comment;
 import app.entities.Post;
+import app.exceptions.PostNotFoundException;
 import app.repositories.CommentsRepository;
 import app.repositories.PostsRepository;
 import org.springframework.stereotype.Service;
