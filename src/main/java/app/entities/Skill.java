@@ -15,4 +15,10 @@ public class Skill {
 
     @Column(name = "name")
     private String name;
+
+    public Skill() {}
+
+    public Skill(String skillName) {
+        this.name = skillName;
+    }
 }
