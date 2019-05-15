@@ -1,4 +1,4 @@
-package app.services;
+package app.exceptions;
 
 public class PostNotFoundException extends Exception {
 }
