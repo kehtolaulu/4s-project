@@ -104,7 +104,7 @@
                                        placeholder="Company name" required>
                             </div>
                             <div class="form-group col-5">
-                                <input name='companyLocation' type="text" class="form-control" id="companyLocation"
+                                <input name='location' type="text" class="form-control" id="companyLocation"
                                        placeholder="Location" required>
                             </div>
                             <div class="col-1"></div>

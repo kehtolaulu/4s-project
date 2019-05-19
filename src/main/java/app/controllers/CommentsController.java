@@ -1,8 +1,9 @@
 package app.controllers;
 
 import app.entities.Comment;
-import app.services.AccountDetails;
+import app.entities.Post;
 import app.exceptions.PostNotFoundException;
+import app.services.AccountDetails;
 import app.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,11 +11,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping(path = "/posts/{id}")
+@RequestMapping(path = "/posts/{id}/comments")
 public class CommentsController {
     private final PostService postService;
 
@@ -24,13 +25,29 @@ public class CommentsController {
     }
 
     @ResponseBody
-    @PostMapping(path = "/comments", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Map createComment(@RequestParam("text") String content,
                              @AuthenticationPrincipal AccountDetails user,
                              @PathVariable("id") Long postId) throws PostNotFoundException {
 
         Comment comment = postService.createComment(content, user.getUser(), postId);
 
+        return jsonify(comment);
+    }
+
+    @ResponseBody
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Map> getComments(@PathVariable("id") Long postId) {
+        List<Map> comments = postService.findPost(postId)
+                .map(Post::getComments)
+                .orElse(Collections.emptyList())
+                .stream()
+                .map(this::jsonify)
+                .collect(Collectors.toList());
+        return comments;
+    }
+
+    private Map jsonify(Comment comment) {
         return new TreeMap<String, Object>() {{
             put("id", comment.getId());
             put("content", comment.getContent());

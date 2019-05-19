@@ -61,4 +61,18 @@ public class ProfileService {
             profileRepository.save(profile);
         };
     }
+
+    public BindToProfile add(Company company) {
+        return profile -> {
+            profile.getInterests().add(company);
+            profileRepository.save(profile);
+        };
+    }
+
+    public BindToProfile delete(Company company) {
+        return profile -> {
+            profile.getInterests().remove(company);
+            profileRepository.save(profile);
+        };
+    }
 }

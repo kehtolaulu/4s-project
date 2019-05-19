@@ -22,7 +22,6 @@ public class PostService {
         this.commentsRepository = commentsRepository;
     }
 
-
     public Optional<Post> findPost(Long id) {
         return postsRepository.findById(id);
     }
@@ -51,6 +50,6 @@ public class PostService {
     }
 
     public List<Post> all() {
-        return postsRepository.findAll();
+        return postsRepository.findAllOrderByPublishedAtDesc();
     }
 }

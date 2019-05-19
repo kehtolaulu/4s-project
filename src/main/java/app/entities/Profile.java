@@ -45,14 +45,14 @@ public class Profile extends Account {
     @ManyToMany
     @JoinTable(
             name = "interest",
-            joinColumns = {@JoinColumn(name = "account_id")},
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "company_id")})
     List<Account> interests = new LinkedList<>();
 
     @ManyToMany
     @JoinTable(
             name = "saved_job",
-            joinColumns = {@JoinColumn(name = "account_id")},
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "job_id")}
     )
     List<Job> savedJobs = new LinkedList<>();
@@ -60,7 +60,7 @@ public class Profile extends Account {
     @ManyToMany
     @JoinTable(
             name = "application",
-            joinColumns = {@JoinColumn(name = "account_id")},
+            joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "job_id")}
     )
     List<Job> applications = new LinkedList<>();

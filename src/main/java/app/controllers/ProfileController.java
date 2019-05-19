@@ -4,6 +4,7 @@ import app.entities.*;
 import app.exceptions.AccountNotFoundException;
 import app.forms.EducationForm;
 import app.services.AccountDetails;
+import app.services.AccountService;
 import app.services.EducationService;
 import app.services.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,20 @@ import org.springframework.web.bind.annotation.*;
 public class ProfileController {
     private final ProfileService profileService;
     private final EducationService educationService;
+    private final AccountService accountService;
 
     @Autowired
-    public ProfileController(ProfileService profileService, EducationService educationService) {
+    public ProfileController(ProfileService profileService, EducationService educationService, AccountService accountService) {
         this.profileService = profileService;
         this.educationService = educationService;
+        this.accountService = accountService;
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public String getProfileByIdPage(@PathVariable Long id,
                                      ModelMap modelMap,
                                      @AuthenticationPrincipal AccountDetails account) {
-        final Profile profile = profileService.findById(id)
-                .orElseThrow(AccountNotFoundException::new);
+        final Account profile = accountService.accountById(id).orElseThrow(AccountNotFoundException::new);
         final Account user = profileService.findAccountById(account.getUser().getId())
                 .orElseThrow(AccountNotFoundException::new);
         modelMap.put("profile", profile);

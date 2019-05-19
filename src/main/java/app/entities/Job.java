@@ -3,7 +3,6 @@ package app.entities;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 @Data
 @Entity
@@ -18,11 +17,11 @@ public class Job {
     @JoinColumn(name = "company_id")
     private Company company;
 
+    @Column(name = "position")
+    private String position;
+
     @Column(name = "published_at")
     private LocalDateTime publishedAt;
-
-    @Column(name = "content")
-    private String content;
 
     @Column(name = "seniority_level")
     private String seniorityLevel;

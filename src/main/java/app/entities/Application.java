@@ -3,6 +3,7 @@ package app.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -24,4 +25,14 @@ public class Application {
     private String number;
 
     private String email;
+
+    @Column(name = "is_accepted")
+    private Integer isAccepted;
+
+    @Column(name = "is_rejected")
+    private Integer isRejected;
+
+    @Column(name = "publishedAt")
+    private LocalDateTime publishedAt;
+
 }

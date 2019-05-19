@@ -22,7 +22,7 @@
                     </li>
                 </@security.authorize>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Jobs</a>
+                    <a href="/jobs" class="nav-link">Jobs</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Messaging</a>
@@ -37,7 +37,12 @@
                         Profile
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/profile">View profile</a>
+                        <@security.authorize access="hasRole('ROLE_HUMAN')">
+                            <a class="dropdown-item" href="/profile">View profile</a>
+                        </@security.authorize>
+                        <@security.authorize access="hasRole('ROLE_COMPANY')">
+                            <a class="dropdown-item" href="/company">View profile</a>
+                        </@security.authorize>
                         <a class="dropdown-item" href="/logout">Log out</a>
                     </div>
                 </li>

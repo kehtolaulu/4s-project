@@ -1,7 +1,12 @@
 <#include "_html.ftl">
 
+<#macro import>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+    <script src="/js/post.js" defer></script>
+</#macro>
+
 <#macro body>
-<div class="row">
+<div class="row" id="vueapp">
     <div class="col-1"></div>
     <div class="col-2">
     </div>
@@ -32,16 +37,25 @@
             <#else>
                 <b id="no-comments">There are no comments yet.</b>
             </#if>
+
+            <post-comment
+                    v-for="comment in comments"
+                    v-bind:key="comment.id"
+                    v-bind:comment="comment"
+            ></post-comment>
         </div>
         <div class="form-group comment">
             <label for="commentForm">Comment:</label>
-            <textarea class="form-control" rows="3" id="commentForm" maxlength="160"></textarea>
+            <textarea class="form-control" v-model="commentInput" rows="3" id="commentForm" maxlength="160">
+
+            </textarea>
             <br>
-            <button class="btn btn-outline-success my-2 my-sm-0" id="comment" type="submit" onclick="newComment()">Send
+            <button class="btn btn-outline-success my-2 my-sm-0" id="comment" v-on:click="createComment()">Send
                 comment
             </button>
         </div>
     </div>
 </div>
 </#macro>
+
 <@page></@page>
