@@ -75,4 +75,12 @@ public class ProfileService {
             profileRepository.save(profile);
         };
     }
+
+    public BindToProfile saveJob(Job job) {
+        return profile -> {
+            profile.getSavedJobs().add(job);
+            profileRepository.save(profile);
+        };
+    }
+
 }

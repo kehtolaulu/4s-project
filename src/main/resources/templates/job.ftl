@@ -21,11 +21,28 @@
                     </#if>
                     <p class="card-text" id="jobFunctions">Job functions:
                         ${job.jobFunctions}</p>
+
                     <@security.authorize access="hasRole('ROLE_HUMAN')">
-                        <button type="button" class="btn btn-light">Save</button>
+                        <#if saved??>
+                            <#if saved?seq_contains(job)>
+                            <div class="alert alert-success" role="alert">
+                               Saved
+                            </div>
+                            <#else>
+                                <form action="/jobs/${job.id}/save" method="post">
+                                    <button type="submit" class="btn btn-light">Save</button>
+                                </form>
+                            </#if>
+                        <#else>
+                            <form action="/jobs/${job.id}/save" method="post">
+                                <button type="submit" class="btn btn-light">Save</button>
+                            </form>
+                        </#if>
                     <#if applied??>
                         <#if applied?seq_contains(job)>
-                            You have applied.
+                            <div class="alert alert-success" role="alert">
+                                Applied
+                            </div>
                         <#else>
                         <form action="/jobs/${job.id}/apply" method="post">
                             <button type="submit" class="btn btn-primary">Apply</button>

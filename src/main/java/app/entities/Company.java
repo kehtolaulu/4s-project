@@ -4,8 +4,10 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
+@ToString(exclude = {"jobs"})
 @Entity
 @Table(name = "company")
 public class Company extends Account {
@@ -24,4 +26,8 @@ public class Company extends Account {
     public String getType() {
         return "COMPANY";
     }
+
+    @OneToMany
+    @JoinColumn(name = "company_id")
+    private List<Job> jobs;
 }

@@ -63,7 +63,7 @@ public class Profile extends Account {
             joinColumns = {@JoinColumn(name = "profile_id")},
             inverseJoinColumns = {@JoinColumn(name = "job_id")}
     )
-    List<Job> applications = new LinkedList<>();
+    List<Application> applications = new LinkedList<>();
 
     @Override
     public String getName() {

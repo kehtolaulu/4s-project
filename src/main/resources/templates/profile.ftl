@@ -97,7 +97,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Interests</h5>
-                            <#if profile.interests?has_content>
+                            <#if profile.interests??>
                                 <#list profile.interests as interest>
                                 <p class="card-text"><a href="/company/${interest.id}">${interest.name}</a></p>
                                 </#list>

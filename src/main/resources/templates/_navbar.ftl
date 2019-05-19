@@ -6,8 +6,8 @@
         <nav class="navbar navbar-light bg-light justify-content-end">
             <form class="form-inline">
                 <a href="#" class="navbar-brand">Logo</a>
-                <input class="form-control mr-sm-2" id="search-box" type="text" placeholder="Write here..."
-                       aria-label="Search">
+                <#--<input class="form-control mr-sm-2" id="search-box" type="text" placeholder="Write here..."-->
+                       <#--aria-label="Search">-->
                 <button class="btn btn-outline-success my-2 my-sm-1" type="submit">Search</button>
             </form>
         </nav>
@@ -23,6 +23,9 @@
                 </@security.authorize>
                 <li class="nav-item">
                     <a href="/jobs" class="nav-link">Jobs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">People</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Messaging</a>

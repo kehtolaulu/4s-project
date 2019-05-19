@@ -47,7 +47,8 @@ public class CompanyController {
         final Account user = account.getUser();
         final Company profile = companyService.companyById(user.getId()).orElseThrow(AccountNotFoundException::new);
         modelMap.put("company", profile);
-        modelMap.put("user", profile);
+        modelMap.put("profile", profile);
+        modelMap.put("user", user);
         return "company";
     }
 

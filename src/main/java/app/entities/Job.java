@@ -1,11 +1,15 @@
 package app.entities;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Data
 @Entity
+@ToString(exclude = {"applications"})
 @Table(name = "job")
 public class Job {
     @Id
@@ -35,5 +39,9 @@ public class Job {
 
     @Column(name = "job_functions")
     private String jobFunctions;
+
+    @OneToMany
+    @JoinColumn(name = "job_id")
+    private List<Application> applications;
 
 }
