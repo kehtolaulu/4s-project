@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 <#else>
-                     <#if contacts.contains(profile)>
+                     <#if contacts?seq_contains(profile)>
                         <form action="/profile/${profile.id}/add" method="post">
                             <button class="btn btn-primary" type="submit">Add to contact</button>
                         </form>
