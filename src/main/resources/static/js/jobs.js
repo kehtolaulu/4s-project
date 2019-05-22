@@ -23,14 +23,6 @@ const showAppliedJobs = () => {
     document.getElementById('ours').style.display = 'none';
 };
 
-const showApplications = () => {
-    document.getElementById('jobs').style.display = 'none';
-    document.getElementById('saved').style.display = 'none';
-    document.getElementById('applied').style.display = 'none';
-    document.getElementById('applications').style.display = 'block';
-    document.getElementById('ours').style.display = 'none';
-};
-
 const showOurJobs = () => {
     document.getElementById('jobs').style.display = 'none';
     document.getElementById('saved').style.display = 'none';

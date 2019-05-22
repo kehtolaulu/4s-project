@@ -2,16 +2,24 @@ package app.entities;
 
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
-
-import java.util.LinkedList;
-import java.util.List;
 
 @NodeEntity(label = "Profile")
 public class Neo4jProfile {
     @Id
     private Long profileId;
 
-    @Relationship(type = "KNOWS")
-    List<Neo4jProfile> friends = new LinkedList<>();
+    public Neo4jProfile() {
+    }
+
+    public Neo4jProfile(Long profileId) {
+        this.profileId = profileId;
+    }
+
+    public Long getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileId(Long profileId) {
+        this.profileId = profileId;
+    }
 }

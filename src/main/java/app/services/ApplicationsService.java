@@ -5,7 +5,6 @@ import app.repositories.ApplicationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,11 +22,24 @@ public class ApplicationsService {
     }
 
     public void save(Application application) {
-        application.setPublishedAt(LocalDateTime.now());
         applicationsRepository.save(application);
     }
 
     public List<Application> getAllApplications() {
         return applicationsRepository.findAll();
+    }
+
+    public Optional<Application> findByProfileAndJob(Long profileId, Long jobId) {
+        return applicationsRepository.findByProfileIdAndJobId(profileId, jobId);
+    }
+
+    public void rejectApplication(Application application) {
+        application.setIsRejected(1);
+        applicationsRepository.save(application);
+    }
+
+    public void acceptApplication(Application application) {
+        application.setIsAccepted(1);
+        applicationsRepository.save(application);
     }
 }

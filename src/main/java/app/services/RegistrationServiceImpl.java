@@ -6,6 +6,7 @@ import app.forms.CompanyForm;
 import app.forms.ProfileForm;
 import app.repositories.CompanyRepository;
 import app.repositories.ProfileRepository;
+import app.repositories.neo4j.Neo4jProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,17 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     private final CompanyRepository companyRepository;
     private final ProfileRepository profileRepository;
+    private final Neo4jProfileRepository neo4jProfileRepository;
 
     @Autowired
-    public RegistrationServiceImpl(PasswordEncoder passwordEncoder, CompanyRepository companyRepository, ProfileRepository seekerRepository) {
+    public RegistrationServiceImpl(PasswordEncoder passwordEncoder,
+                                   CompanyRepository companyRepository,
+                                   ProfileRepository seekerRepository,
+                                   Neo4jProfileRepository neo4jProfileRepository) {
         this.passwordEncoder = passwordEncoder;
         this.companyRepository = companyRepository;
         this.profileRepository = seekerRepository;
+        this.neo4jProfileRepository = neo4jProfileRepository;
     }
 
     @Override
@@ -47,6 +53,8 @@ public class RegistrationServiceImpl implements RegistrationService {
         profile.setEmail(form.getEmail());
         profile.setPhoneNumber(form.getPhoneNumber());
         profile.setPasswordHash(passwordEncoder.encode(form.getPassword()));
-        profileRepository.save(profile);
+        final Profile savedProfile = profileRepository.save(profile);
+
+        neo4jProfileRepository.createProfile(savedProfile.getId());
     }
 }

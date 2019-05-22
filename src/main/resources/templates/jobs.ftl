@@ -6,6 +6,7 @@
 </#macro>
 
 <#macro body>
+
     <div class="row">
         <div class="col-3"></div>
         <div class="col-6">
@@ -23,13 +24,13 @@
                         <button type="button" class="btn btn-link" onclick="showAppliedJobs()">
                             Applied jobs
                         </button>
+                        |
+                        <a href="/search/jobs.html" class="btn btn-link">
+                            Search
+                        </a>
                     </@security.authorize>
                     <@security.authorize access="hasRole('ROLE_COMPANY')">
                         <a href="/jobs/create" class="btn btn-link">Create a job</a>
-                        |
-                        <button type="button" class="btn btn-link" onclick="showApplications()">
-                            Applications
-                        </button>
                         |
                         <button type="button" class="btn btn-link" onclick="showOurJobs()">
                             Our jobs
@@ -47,11 +48,8 @@
     </div>
     <div class="row">
         <div class="col-1"></div>
-        <div class="col-2">
-        </div>
-
-        <#--ALL JOBS-->
-
+        <div class="col-2"></div>
+    <#--ALL JOBS-->
         <div class="col-6" id="jobs">
         <#if jobs?has_content>
             <#list jobs as job>
@@ -70,7 +68,7 @@
         </#if>
         </div>
 
-        <#--SAVED JOBS-->
+    <#--SAVED JOBS-->
 
         <div class="col-6" id="saved">
             <#if saved?has_content>
@@ -90,7 +88,7 @@
             </#if>
         </div>
 
-        <#--APPLIED JOBS-->
+    <#--APPLIED JOBS-->
 
         <div class="col-6" id="applied">
             <#if applied?has_content>
@@ -119,36 +117,7 @@
             </#if>
         </div>
 
-        <#--APPLICATIONS-->
-
-        <div class="col-6" id="applications">
-        <#if applications?has_content>
-            <#list applications as application>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-10">
-                            <p class="card-text">Applicant: <a href="/profile/${application.profile.id}">${application.profile.firstName}</a></p>
-                            <p class="card-text">Job: <a href="/jobs/${application.job.id}">${application.job.position}</a></p>
-                            <p class="card-text">Email: ${application.email}</p>
-                            <p class="card-text">Phone number: ${application.number}</p>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn btn-outline-success my-2 my-sm-1" type="submit">Accept</button>
-                            <br>
-                            <button class="btn btn-outline-danger my-2 my-sm-1" type="submit">Reject</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer text-muted">
-                    ${application.pubishedAt}
-                </div>
-            </div>
-            </#list>
-        </#if>
-        </div>
-
-        <#--OUR JOBS-->
+    <#--OUR JOBS-->
 
         <div class="col-6" id="ours">
         <#if ours?has_content>

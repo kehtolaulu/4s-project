@@ -46,8 +46,9 @@ public class Profile extends Account {
     @JoinTable(
             name = "interest",
             joinColumns = {@JoinColumn(name = "profile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "company_id")})
-    List<Account> interests = new LinkedList<>();
+            inverseJoinColumns = {@JoinColumn(name = "company_id")}
+    )
+    List<Company> interests = new LinkedList<>();
 
     @ManyToMany
     @JoinTable(
@@ -57,12 +58,8 @@ public class Profile extends Account {
     )
     List<Job> savedJobs = new LinkedList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "application",
-            joinColumns = {@JoinColumn(name = "profile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "job_id")}
-    )
+    @OneToMany
+    @JoinColumn(name = "profile_id")
     List<Application> applications = new LinkedList<>();
 
     @Override

@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(path = "/jobs")
@@ -23,19 +22,21 @@ public class JobsController {
     private final ProfileService profileService;
     private final ApplicationsService applicationsService;
     private final CompanyService companyService;
+    private final IndustryService industryService;
 
     @Autowired
-    public JobsController(JobsService jobsService, ProfileService profileService, ApplicationsService applicationsService, CompanyService companyService) {
+    public JobsController(JobsService jobsService, ProfileService profileService, ApplicationsService applicationsService, CompanyService companyService, IndustryService industryService) {
         this.jobsService = jobsService;
         this.profileService = profileService;
         this.applicationsService = applicationsService;
         this.companyService = companyService;
+        this.industryService = industryService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public String getJobsPage(ModelMap modelMap, @AuthenticationPrincipal AccountDetails account) {
         final List<Job> jobs = jobsService.getAllJobs();
-        if (account.getUser().getType() == "HUMAN") {
+        if (account.getUser().getType().equals("HUMAN")) {
             final Profile profile = profileService.findById(account.getUser().getId()).orElseThrow(AccountNotFoundException::new);
             final List<Job> saved = profile.getSavedJobs();
             final List<Application> applied = profile.getApplications();
@@ -44,11 +45,10 @@ public class JobsController {
         } else {
             final Company company = companyService.companyById(account.getUser().getId()).orElseThrow(AccountNotFoundException::new);
             final List<Job> companyJobs = company.getJobs();
-            final List<Application> applications = companyJobs.stream().flatMap(j -> j.getApplications().stream()).distinct().collect(Collectors.toList());
-            modelMap.put("applications", applications);
             modelMap.put(("ours"), companyJobs);
         }
         modelMap.put("jobs", jobs);
         return "jobs";
     }
+
 }

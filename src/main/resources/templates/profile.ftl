@@ -43,7 +43,11 @@
                         </div>
                     </div>
                 <#else>
-                    <button class="btn btn-primary">Add to contact</button>
+                     <#if contacts.contains(profile)>
+                        <form action="/profile/${profile.id}/add" method="post">
+                            <button class="btn btn-primary" type="submit">Add to contact</button>
+                        </form>
+                     </#if>
                 </#if>
                     </div>
                 </div>
@@ -97,7 +101,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Interests</h5>
-                            <#if profile.interests??>
+                            <#if profile.interests?has_content>
                                 <#list profile.interests as interest>
                                 <p class="card-text"><a href="/company/${interest.id}">${interest.name}</a></p>
                                 </#list>
