@@ -18,15 +18,12 @@ public interface Neo4jProfileRepository extends Neo4jRepository<Neo4jProfile, Lo
     @Query("CREATE (p:Profile {profileId: {id}}) RETURN p;")
     void createProfile(@Param("id") long profileId);
 
-    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS]->(f) RETURN p, k, f;")
+    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS]->(f) RETURN k, f;")
     Stream<Neo4jProfile> findCircleWithDepth1(@Param("id") long profileId);
 
-    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS*1..2]->(f) RETURN p, k, f;")
+    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS*2]->(f) RETURN k, f;")
     Stream<Neo4jProfile> findCircleWithDepth2(@Param("id") long profileId);
 
-    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS*1..3]->(f) RETURN p, k, f;")
+    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS*3]->(f) RETURN k, f;")
     Stream<Neo4jProfile> findCircleWithDepth3(@Param("id") long profileId);
-
-    @Query("MATCH (p:Profile {profileId: {id}}) RETURN exists(p);")
-    boolean existsByProfileId(@Param("id") Long profileId);
 }

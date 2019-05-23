@@ -29,7 +29,11 @@ public class NetworkController {
     @GetMapping
     public String getNetworkPage(ModelMap modelMap, @AuthenticationPrincipal AccountDetails account) {
         final List<Profile> circle1 = contactService.circleOfProfile(account.getUser().getId()).apply(1);
-        modelMap.put("contacts", circle1);
+        final List<Profile> circle2 = contactService.circleOfProfile(account.getUser().getId()).apply(2);
+        final List<Profile> circle3 = contactService.circleOfProfile(account.getUser().getId()).apply(3);
+        modelMap.put("first", circle1);
+        modelMap.put("second", circle2);
+        modelMap.put("third", circle3);
         return "network";
     }
 }

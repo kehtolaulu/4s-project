@@ -24,9 +24,16 @@
                 <li class="nav-item">
                     <a href="/jobs" class="nav-link">Jobs</a>
                 </li>
+                <@security.authorize access="hasRole('ROLE_HUMAN')">
                 <li class="nav-item">
                     <a href="/people" class="nav-link">People</a>
                 </li>
+                </@security.authorize>
+                <@security.authorize access="hasRole('ROLE_COMPANY')">
+                    <li class="nav-item">
+                        <a href="/by_skill" class="nav-link">People</a>
+                    </li>
+                </@security.authorize>
                 <@security.authorize access="hasRole('ROLE_COMPANY')">
                     <li class="nav-item">
                         <a href="/applications" class="nav-link">Applications</a>

@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/search")
-public class SearchJobsController {
+public class JobsSearchController {
     private final JobsService jobsService;
     private final ProfileService profileService;
     private final IndustryService industryService;
 
-    public SearchJobsController(JobsService jobsService, ProfileService profileService, IndustryService industryService) {
+    public JobsSearchController(JobsService jobsService, ProfileService profileService, IndustryService industryService) {
         this.jobsService = jobsService;
         this.profileService = profileService;
         this.industryService = industryService;

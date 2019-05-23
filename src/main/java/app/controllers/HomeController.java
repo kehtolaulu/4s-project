@@ -1,8 +1,10 @@
 package app.controllers;
 
 import app.entities.Post;
+import app.services.AccountDetails;
 import app.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +23,8 @@ public class HomeController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getHomePage(ModelMap modelMap) {
-        final List<Post> posts = postService.all();
+    public String getHomePage(ModelMap modelMap, @AuthenticationPrincipal AccountDetails account) {
+        final List<Post> posts = postService.all(account.getUser());
         modelMap.put("posts", posts);
         return "home";
     }

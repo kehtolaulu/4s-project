@@ -24,27 +24,36 @@
                             <#else>
                                 <p class="card-text">No description yet.</p>
                             </#if>
-                            <#if user.id == profile.id>
+                            <#if can_edit>
                                 <button class="btn btn-primary" type="button" data-toggle="modal"
                                         data-target="#editModal">Edit
                                 </button>
                             </#if>
-                            <#if user.id != profile.id>
+                            <@security.authorize access="hasRole('ROLE_HUMAN')">
                                 <#if profile.interests?has_content>
-                                    <#if profile.interests.contains(company)>
+                                    <#if profile.interests?seq_contains(company)>
                                     <button class="btn btn-primary"
-                                            onclick="fetch('/company/1/interest', { method: 'DELETE', credentials: 'include' })">
+                                            onclick="fetch('/company/${company.id}/interest',
+                                                    { method: 'DELETE', credentials: 'include' })">
                                         Delete from interests
                                     </button>
                                     </#if>
                                 <#else>
-                                    <button class="btn btn-primary"
-                                            onclick="fetch('/company/1/interest',
-                                            { method: 'POST', credentials: 'include' })">
-                                        Add to interests
-                                    </button>
+                                        <#if profile.interests?has_content>
+                                            <#if !profile.interests?seq_contains(company)>
+                                                <button class="btn btn-primary" onclick="fetch('/company/${company.id}/interest',
+                                                        { method: 'POST', credentials: 'include' })">
+                                                    Add to interests
+                                                </button>
+                                            </#if>
+                                        <#else>
+                                        <button class="btn btn-primary" onclick="fetch('/company/${company.id}/interest',
+                                                { method: 'POST', credentials: 'include' })">
+                                            Add to interests
+                                        </button>
+                                        </#if>
                                 </#if>
-                            </#if>
+                            </@security.authorize>
                     </div>
                 </div>
             </div>

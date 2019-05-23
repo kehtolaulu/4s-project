@@ -66,6 +66,10 @@ public class ProfileService {
         return all;
     }
 
+    public List<Profile> getPeopleBySkills(List<Long> skills) {
+        return profileRepository.getPeopleBySkills(skills);
+    }
+
     public Optional<Profile> findById(Long id) {
         return profileRepository.findById(id);
     }
