@@ -31,19 +31,22 @@ public class CompanyController {
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public String getProfileByIdPage(@PathVariable Long id,
+    public String getCompanyByIdPage(@PathVariable Long id,
                                      ModelMap modelMap,
                                      @AuthenticationPrincipal AccountDetails account) {
-        final Account profile = accountService.accountById(id).orElseThrow(AccountNotFoundException::new);
+        final Account account1 = accountService.accountById(account.getUser().getId()).orElseThrow(AccountNotFoundException::new);
+        if (account1.getType().equals("HUMAN")) {
+            final Profile profile = profileService.findById(account.getUser().getId()).orElseThrow(AccountNotFoundException::new);
+            modelMap.put("profile", profile);
+        }
         final Company company = companyService.companyById(id).orElseThrow(AccountNotFoundException::new);
-        modelMap.put("profile", profile);
         modelMap.put("company", company);
-        modelMap.put("user", account.getUser());
+        modelMap.put("can_edit", account.getUser().getId().equals(id));
         return "company";
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getProfilePage(@AuthenticationPrincipal AccountDetails account, ModelMap modelMap) {
+    public String getCompanyPage(@AuthenticationPrincipal AccountDetails account, ModelMap modelMap) {
         final Account user = account.getUser();
         final Company profile = companyService.companyById(user.getId()).orElseThrow(AccountNotFoundException::new);
         modelMap.put("company", profile);

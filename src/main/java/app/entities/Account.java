@@ -3,6 +3,7 @@ package app.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,6 +26,11 @@ public abstract class Account {
     @Column(name = "phone_number")
     protected String phoneNumber;
 
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    protected List<Post> posts;
+
     abstract public String getName();
+
     abstract public String getType();
 }

@@ -28,8 +28,9 @@ public class ContactService {
     public Consumer<Profile> addContact(Profile profile1) {
         return profile2 -> {
             // ensure that profiles exist in graph
+            // get Neo4jProfile by profileId, check if Optional is empty, create Neo4jProfile
             for (Profile p : Arrays.asList(profile1, profile2))
-                if (!neo4jProfileRepository.existsByProfileId(p.getId())) {
+                if (!neo4jProfileRepository.findByProfileId(p.getId()).isPresent()) {
                     neo4jProfileRepository.save(new Neo4jProfile(p.getId()));
                 }
             // create relation p1 -- :KNOWS -> p2
