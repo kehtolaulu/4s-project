@@ -1,5 +1,7 @@
 package app.entities;
 
+import app.entities.validation.EmailConstraint;
+import app.entities.validation.PhoneNumberConstraint;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ public abstract class Account {
     @Column(name = "id")
     private Long id;
 
+    @EmailConstraint
     @Column(name = "email")
     protected String email;
 
@@ -22,6 +25,7 @@ public abstract class Account {
     @Column(name = "location")
     protected String location;
 
+    @PhoneNumberConstraint
     @Column(name = "phone_number")
     protected String phoneNumber;
 
