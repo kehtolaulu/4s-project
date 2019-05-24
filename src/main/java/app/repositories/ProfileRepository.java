@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
@@ -23,4 +24,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
                     " HAVING (COUNT(profile_id) >= :match)) AS s USING (id);"
     )
     List<Profile> getPeopleBySkills(@Param("skills") List<Long> skills, @Param("match") int match);
+
+    Optional<Profile> findByEmail(String email);
 }

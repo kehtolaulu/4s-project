@@ -1,18 +1,19 @@
 package app.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path = "/login")
 public class LoginController {
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping("/signin")
     public String getLoginPage() {
         return "login";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping
     public String login() {
         return "redirect:/home";
     }

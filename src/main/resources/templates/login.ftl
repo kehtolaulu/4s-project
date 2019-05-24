@@ -35,6 +35,8 @@
                             <button type="button" class="btn btn-link"><a href="/register">Sign up</a></button>
                         </div>
                     </form>
+
+                    <p>Sign in with <a href="/login">Google</a></p>
                 </div>
             </div>
         </div>
