@@ -29,7 +29,7 @@ public class Profile extends Account {
 
     @Column(name = "status")
     private String status;
-
+    // вот это скилы, а мне нужны лайки к скилам
     @OneToMany
     @JoinColumn(name = "profile_id")
     List<ProfileSkill> skills = new LinkedList<>();

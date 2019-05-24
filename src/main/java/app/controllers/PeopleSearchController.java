@@ -1,6 +1,7 @@
 package app.controllers;
 
 import app.entities.Profile;
+import app.entities.Skill;
 import app.services.AccountDetails;
 import app.services.ProfileService;
 import app.services.SkillService;
@@ -41,11 +42,10 @@ public class PeopleSearchController {
     public List<Map> searchJobs(@RequestParam(value = "skills") String query,
                                 @AuthenticationPrincipal AccountDetails user) {
         List<String> skillNames = Arrays.asList(query.split(" "));
-        final List<Long> skills = skillNames.stream().map(skillService::getSkillByName).map(skill -> skill.getId()).collect(Collectors.toList());
+        final List<Long> skills = skillNames.stream().map(skillService::getSkillByName).map(Skill::getId).collect(Collectors.toList());
         final List<Profile> people = profileService.getPeopleBySkills(skills);
         return people.stream().map(this::jsonify).collect(Collectors.toList());
     }
-
     private Map jsonify(Profile profile) {
         return new TreeMap<String, Object>() {{
             put("id", profile.getId());

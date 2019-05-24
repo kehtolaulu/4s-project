@@ -39,9 +39,6 @@
                         <a href="/applications" class="nav-link">Applications</a>
                     </li>
                 </@security.authorize>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Messaging</a>
-                </li>
             </ul>
 
 

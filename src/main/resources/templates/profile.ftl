@@ -1,4 +1,10 @@
+<#-- @ftlvariable name="profile" type="app.entities.Profile" -->
+
 <#include "_html.ftl">
+
+<#macro import>
+    <script src="/js/like.js" defer></script>
+</#macro>
 
 <#macro body>
     <div class="row">
@@ -61,9 +67,8 @@
                                 <#list profile.skills as skill>
                                     <p class="card-text">
                                         ${skill.getName()}
-                                        <#if profile.id != user.id>
-                                            <span id="span" onclick="alert('to do')">+</span>
-                                        </#if>
+                                            <button id="span-${skill.id}" onclick="likeSkill(${skill.id})">+</button>
+                                        <span id="likes-${skill.id}">${skill.likedBy?size}</span>
                                     </p>
                                 </#list>
                             <#else>
@@ -130,9 +135,9 @@
                 <div class="modal-body">
                     <form id="editForm" method="post" action="/profile/${user.id}/edit">
                         <input type="text" class="form-control" id="location" name="location" placeholder="Location"
-                               value="${profile.location}">
+                               value="${profile.location}" required>
                         <br>
-                        <select class="custom-select" id="status" name="status">
+                        <select class="custom-select" id="status" name="status" required>
                             <option selected disabled value="0">Choose status</option>
                             <option value="1">Actively applying</option>
                             <option value="2">Casually looking</option>
@@ -161,7 +166,7 @@
                 <div class="modal-body">
                     <form action="/profile/${user.id}/add_skill" method="post" id="skillForm">
                     <input type="text" class="form-control" id="skill-name" name="skillName"
-                           placeholder="For example: Java">
+                           placeholder="For example: Java" required>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -184,16 +189,18 @@
                     <form id="eduForm" action="/profile/${user.id}/add_edu" method="post">
                         <div class="row">
                             <div class="col">
-                                <input type="number" class="form-control" id="start" name="startedAt" placeholder="2017">
+                                <input type="number" class="form-control" id="start" name="startedAt" placeholder="2017" required>
                             </div>
                             <div class="col">
-                                <input type="number" class="form-control" id="finish" name="finishedAt" placeholder="2021">
+                                <input type="number" class="form-control" id="finish" name="finishedAt" placeholder="2021" required>
                             </div>
                         </div>
                         <br>
-                        <input type="text" class="form-control" id="school" name="school" placeholder="School">
+                        <input type="text" class="form-control" id="school" name="school" placeholder="School" required>
                         <br>
-                        <input type="text" class="form-control" id="degree" name="degree" placeholder="Degree">
+                        <input type="text" class="form-control" id="field" name="field" placeholder="Field" required>
+                        <br>
+                        <input type="text" class="form-control" id="degree" name="degree" placeholder="Degree" required>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -216,16 +223,16 @@
                     <form id="workForm" action="/profile/${user.id}/add_work" method="post">
                         <div class="row">
                             <div class="col">
-                                <input type="number" class="form-control" id="start" name="startedAt" placeholder="2017">
+                                <input type="number" class="form-control" id="start" name="startedAt" placeholder="2017" required>
                             </div>
                             <div class="col">
-                                <input type="number" class="form-control" id="finish" name="finishedAt" placeholder="2021">
+                                <input type="number" class="form-control" id="finish" name="finishedAt" placeholder="2021" required>
                             </div>
                         </div>
                         <br>
-                        <input type="text" class="form-control" id="company" name="company" placeholder="Company">
+                        <input type="text" class="form-control" id="company" name="company" placeholder="Company" required>
                         <br>
-                        <input type="text" class="form-control" id="position" name="position" placeholder="Position">
+                        <input type="text" class="form-control" id="position" name="position" placeholder="Position" required>
                     </form>
                 </div>
                 <div class="modal-footer">

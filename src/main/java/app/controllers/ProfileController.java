@@ -108,7 +108,6 @@ public class ProfileController {
         final Profile profile = profileService.findById(account.getUser().getId())
                 .orElseThrow(AccountNotFoundException::new);
         assert profile.getId() == id;
-
         educationService.save(educationForm, profile);
         return "redirect:/profile";
     }
@@ -120,7 +119,7 @@ public class ProfileController {
         final Profile profile = profileService.findById(account.getUser().getId())
                 .orElseThrow(AccountNotFoundException::new);
         assert profile.getId() == id;
-
+        workExperience.setId(null);
         profileService.add(workExperience).to(profile);
         return "redirect:/profile";
     }

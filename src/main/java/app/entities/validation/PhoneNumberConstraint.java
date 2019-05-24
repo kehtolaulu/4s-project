@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PhoneNumberValidation.class)
 public @interface PhoneNumberConstraint {
-    String message() default "Invalid email.";
+    String message() default "Invalid number.";
 
     Class<?>[] groups() default {};
 

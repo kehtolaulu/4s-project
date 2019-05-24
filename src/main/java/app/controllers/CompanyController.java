@@ -41,6 +41,7 @@ public class CompanyController {
         }
         final Company company = companyService.companyById(id).orElseThrow(AccountNotFoundException::new);
         modelMap.put("company", company);
+        modelMap.put("user", account1);
         modelMap.put("can_edit", account.getUser().getId().equals(id));
         return "company";
     }
@@ -52,6 +53,7 @@ public class CompanyController {
         modelMap.put("company", profile);
         modelMap.put("profile", profile);
         modelMap.put("user", user);
+        modelMap.put("can_edit", true);
         return "company";
     }
 

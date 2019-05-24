@@ -28,6 +28,7 @@ public class EducationService {
         education.setFinishedAt(yearFinished);
 
         education.setDegree(educationForm.getDegree());
+        education.setField(educationForm.getField());
         education.setSchool(educationForm.getSchool());
         education.setProfile(profile);
         educationRepository.save(education);

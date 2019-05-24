@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">${job.position}</h5>
-                    <p class="card-text" id="company">${job.company.name}</p>
+                    <p class="card-text" id="company"><a href="/company/${job.company.id}">${job.company.name}</a></p>
                     <p class="card-text" id="seniority">Seniority level: ${job.seniorityLevel}</p>
                     <p class="card-text" id="industry">Industry: ${job.industry.name}</p>
                     <p class="card-text" id="employmentType">Employment type: ${job.employmentType}</p>

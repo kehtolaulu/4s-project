@@ -31,7 +31,7 @@ public class ContactService {
             // get Neo4jProfile by profileId, check if Optional is empty, create Neo4jProfile
             for (Profile p : Arrays.asList(profile1, profile2))
                 if (!neo4jProfileRepository.findByProfileId(p.getId()).isPresent()) {
-                    neo4jProfileRepository.save(new Neo4jProfile(p.getId()));
+                    neo4jProfileRepository.save(new Neo4jProfile(p.getId())); // тут
                 }
             // create relation p1 -- :KNOWS -> p2
             neo4jProfileRepository.createLink(profile1.getId(), profile2.getId());

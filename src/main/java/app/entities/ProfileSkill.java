@@ -25,11 +25,11 @@ public class ProfileSkill {
 
     @ManyToMany
     @JoinTable(
-            name = "like_to_skill",
-            joinColumns = {@JoinColumn(name = "profile_id")},
-            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
+            name = "like_to_profile_skill",
+            joinColumns = {@JoinColumn(name = "profile_skill_id")},
+            inverseJoinColumns = {@JoinColumn(name = "account_id")}
     )
-    private List<Profile> likedBy = new LinkedList<>();
+    private List<Account> likedBy = new LinkedList<>();
 
     public ProfileSkill() {}
 

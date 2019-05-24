@@ -11,7 +11,16 @@ import java.util.List;
 @Repository
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     List<Profile> getAllByFirstNameAndLastName(String firstName, String lastName);
-    @Query(nativeQuery = true, value = "WITH selected AS (SELECT DISTINCT profile_id FROM profile_skills WHERE skill_id IN (:skills)) SELECT * FROM account" +
-            " INNER JOIN selected ON account.id = selected.profile_id;")
-    List<Profile> getPeopleBySkills(@Param("skills") List<Long> skills);
+
+    @Query(
+            nativeQuery = true,
+            value = "select * " +
+                    "FROM account p " +
+                    " INNER JOIN (select profile_id AS id " +
+                    " from profile_skills " +
+                    " WHERE skill_id IN :skills " +
+                    " group by profile_id " +
+                    " HAVING (COUNT(profile_id) >= :match)) AS s USING (id);"
+    )
+    List<Profile> getPeopleBySkills(@Param("skills") List<Long> skills, @Param("match") int match);
 }

@@ -67,7 +67,7 @@ public class ProfileService {
     }
 
     public List<Profile> getPeopleBySkills(List<Long> skills) {
-        return profileRepository.getPeopleBySkills(skills);
+        return profileRepository.getPeopleBySkills(skills, skills.size());
     }
 
     public Optional<Profile> findById(Long id) {
@@ -83,7 +83,7 @@ public class ProfileService {
     }
 
     public Skill createSkill(String skillName) {
-        Optional<Skill> skill = skillsRepository.findByName(skillName);
+        Optional<Skill> skill = skillsRepository.findByNameIgnoreCase(skillName);
         return skill.orElseGet(() -> skillsRepository.create(skillName));
     }
 

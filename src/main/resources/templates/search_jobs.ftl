@@ -32,13 +32,15 @@
                 </div>
                 <button class="btn btn-outline-success my-2 my-sm-1" type="submit" v-on:click="search()">Search</button>
             </div>
+
+            <job-item
+                    v-for="job in jobs"
+                    v-bind:key="job.id"
+                    v-bind:job="job"
+            ></job-item>
         </div>
     </div>
-    <job-item
-            v-for="job in jobs"
-            v-bind:key="job.id"
-            v-bind:job="job"
-    ></job-item>
+
 </div>
 </#macro>
 <@page></@page>

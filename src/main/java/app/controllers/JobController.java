@@ -39,12 +39,14 @@ public class JobController {
     @GetMapping
     public String getJobPage(@PathVariable Long id, ModelMap modelMap, @AuthenticationPrincipal AccountDetails account) {
         final Job job = jobsService.jobById(id).orElseThrow(AccountNotFoundException::new);
-        final Profile profile = profileService.findById(account.getUser().getId()).orElseThrow(AccountNotFoundException::new);
-        final List<Job> applied = profile.getApplications().stream().map(Application::getJob).collect(Collectors.toList());
-        final List<Job> saved = profile.getSavedJobs();
+        if (account.getUser().getType().equals("HUMAN")) {
+            final Profile profile = profileService.findById(account.getUser().getId()).orElseThrow(AccountNotFoundException::new);
+            final List<Job> applied = profile.getApplications().stream().map(Application::getJob).collect(Collectors.toList());
+            final List<Job> saved = profile.getSavedJobs();
+            modelMap.put("applied", applied);
+            modelMap.put("saved", saved);
+        }
         modelMap.put("job", job);
-        modelMap.put("applied", applied);
-        modelMap.put("saved", saved);
         return "job";
     }
 

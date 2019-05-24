@@ -66,7 +66,9 @@ public class PostService {
             final Collection<Long> ids = circle.map(Neo4jProfile::getProfileId).collect(Collectors.toList());
             final List<Profile> people = profileRepository.findAllById(ids);
             posts = people.stream().map(Profile::getPosts).flatMap(List::stream).collect(Collectors.toList());
+            final List<Post> mine = profile.getPosts();
             posts.addAll(collect);
+            posts.addAll(mine);
         } else {
             posts = postsRepository.findAllOrderByPublishedAtDesc();
         }

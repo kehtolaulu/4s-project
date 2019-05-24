@@ -12,7 +12,7 @@ public interface Neo4jProfileRepository extends Neo4jRepository<Neo4jProfile, Lo
     @Query("MATCH (a:Profile {profileId: {id1}}) MATCH (b:Profile {profileId: {id2}}) CREATE (a)-[:KNOWS]->(b)")
     void createLink(@Param("id1") long profileId1, @Param("id2") long profileId2);
 
-    @Query("MATCH (p:Profile {profileId: {id}})-[k:KNOWS]->(f:Profile) RETURN p, k, f;")
+    @Query("MATCH (p:Profile {profileId: {id}}) RETURN p;")
     Optional<Neo4jProfile> findByProfileId(@Param("id") Long profileId);
 
     @Query("CREATE (p:Profile {profileId: {id}}) RETURN p;")

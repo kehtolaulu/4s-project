@@ -8,4 +8,5 @@ public class EducationForm {
     private String finishedAt;
     private String school;
     private String degree;
+    private String field;
 }
