@@ -1,0 +1,29 @@
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+      - neo4j
+    ports:
+      - 8080:8080
+  postgres:
+    container_name: postgres
+    image: postgres:10
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=project4
+      - PGDATA=/var/lib/postgresql/10/main
+    ports:
+      - 5430:5432
+  neo4j:
+    image: neo4j:latest
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: "none"
+
