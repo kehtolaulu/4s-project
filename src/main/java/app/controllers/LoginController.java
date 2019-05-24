@@ -13,7 +13,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping
+    @PostMapping("/signin")
     public String login() {
         return "redirect:/home";
     }

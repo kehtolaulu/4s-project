@@ -17,12 +17,7 @@ public class AccountDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final LinkedList<GrantedAuthority> grantedAuthorities = new LinkedList<>();
-        final GrantedAuthority grantedAuthority = new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return "ROLE_" + user.getType();
-            }
-        };
+        final GrantedAuthority grantedAuthority = () -> "ROLE_" + user.getType();
         grantedAuthorities.add(grantedAuthority);
         return grantedAuthorities;
     }

@@ -29,6 +29,7 @@ import org.springframework.security.oauth2.client.token.grant.code.Authorization
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.Filter;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Configuration
@@ -102,7 +103,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             profile.setFirstName((String) map.get("given_name"));
             profile.setLastName((String) map.get("family_name"));
             profile.setEmail(email);
+            profile.setPhoneNumber(((String) map.get("sub")).substring(0, 11));
+            profile.setLocation((String) map.get("locale"));
+            profile.setBirthDate(LocalDate.of(1970, 1, 1));
             profileRepository.save(profile);
+
             return new AccountDetails(profile);
         };
     }

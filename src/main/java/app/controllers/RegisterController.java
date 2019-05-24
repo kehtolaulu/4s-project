@@ -27,12 +27,12 @@ public class RegisterController {
     @PostMapping("/company")
     public String register(CompanyForm registerForm) {
         registrationService.register(registerForm);
-        return "redirect:/home";
+        return "redirect:/signin";
     }
 
     @PostMapping("/profile")
     public String register(ProfileForm registerForm) {
         registrationService.register(registerForm);
-        return "redirect:/home";
+        return "redirect:/signin";
     }
 }
